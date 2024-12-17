@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import './Navbar.css'
 
@@ -9,9 +10,9 @@ const Navbar = () => {
     <div>
         <nav className="navbar navbar-expand-lg">
             <div className="container">
-                <a className="navbar-brand" href="kk">
+                <Link className="navbar-brand" to="/">
                     <b> <IoBook/> todo</b>
-                </a>
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -19,35 +20,35 @@ const Navbar = () => {
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="kk">
+                            <Link className="nav-link active" aria-current="page" to="/">
                                 Home
-                            </a>
+                            </Link>
                         </li>    
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="kk">
+                            <Link className="nav-link active" aria-current="page" to="/about">
                                 About Us
-                            </a>
+                            </Link>
                         </li>     
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="kk">
+                            <Link className="nav-link active" aria-current="page" to="/todo">
                                 todo
-                            </a>
+                            </Link>
                         </li>     
                           
                         <li className="nav-item mx-2 mb-2 ">
-                            <a className="nav-link active btn-nav d-flex justify-content-center" aria-current="page" href="kk">
+                            <Link className="nav-link active btn-nav d-flex justify-content-center" aria-current="page" to="/signUp">
                                 Sign Up
-                            </a>
+                            </Link>
                         </li>     
                         <li className="nav-item mx-2 mb-2">
-                            <a className="nav-link d-flex justify-content-center active btn-nav" aria-current="page" href="kk">
+                            <Link className="nav-link d-flex justify-content-center active btn-nav" aria-current="page" to="/signIn">
                                 Sign In
-                            </a>
+                            </Link>
                         </li>     
                         <li className="nav-item mx-2 mb-2">
-                            <a className="nav-link d-flex justify-content-center active btn-nav" aria-current="page" href="kk">
+                            <Link className="nav-link d-flex justify-content-center active btn-nav" aria-current="page" to="#">
                                 Log Out
-                            </a>
+                            </Link>
                         </li>       
                     </ul>
                 </div>
