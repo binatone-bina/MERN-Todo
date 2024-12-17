@@ -1,0 +1,17 @@
+#userImage{
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-brand{
+    color:crimson;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.btn-nav{
+    background-color: crimson;
+    border-radius: 5px;
+    color: white !important;
+}
+
