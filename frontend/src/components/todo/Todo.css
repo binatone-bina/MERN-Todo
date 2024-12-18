@@ -1,0 +1,56 @@
+.todo{
+    height: 100vh;
+    width: 100%;
+}
+
+.todo input{
+    border-color: crimson;
+    border-radius: 5px;
+}
+
+.todo textarea{
+    border-color: crimson;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+#textArea {
+    display: none;
+}
+
+.post-btn{
+    
+    background-color: crimson;
+    border-radius: 5px;
+    color: white ;
+    font-weight: bold;
+    border: none;
+    padding: 5px 10px;
+}
+
+.todoCard{
+    border:2px solid crimson;
+    border-radius: 5px;
+}
+
+.cardIcons{
+    font-size:medium;
+    color: black;
+}
+
+.cardIcons.upd{
+    color: blue;
+}
+
+.cardIcons.del{
+    color: red;
+}
+
+.card-icon-head{
+    cursor: pointer;
+}
+
+.card-icon-head:hover{
+    
+    color:rgb(22, 196, 22);
+}

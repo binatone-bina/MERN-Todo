@@ -7,6 +7,7 @@ import Navbar from './components/navbar/Navbar';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signUp/SignIn';
+import Todo from './components/todo/Todo';
 
 function App() {
   return(
@@ -19,6 +20,7 @@ function App() {
 
           <Route path='/' element={<Home/>}/>
           <Route path='/about' element={<About/>}/>
+          <Route path='/todo' element={<Todo/>}/>
           <Route path='/signUp' element={<SignUp/>}/>
           <Route path='/signIn' element={<SignIn/>}/>         
 
