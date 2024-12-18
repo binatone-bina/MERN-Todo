@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -12,9 +13,9 @@ const Home = () => {
             <p>Plan your day, prioritize your goals, </p>
             <p> and never miss a deadline again—because your productivity matters!</p>
 
-            <button className='home-btn'>
+            <Link to="/todo" className='home-btn'>
                 Make todo list
-            </button>
+            </Link>
 
         </div>
     </div>
