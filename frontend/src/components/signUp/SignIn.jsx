@@ -3,8 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import './SignUp.css'
 import HeadingComp from './HeadingComp'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../../store'
 
 const SignIn = () => {
+
+    const dispatch = useDispatch();
 
     const history = useNavigate();
 
@@ -20,9 +24,18 @@ const SignIn = () => {
     const submit = async (e) => {
        e.preventDefault();
        await axios.post('http://localhost:1000/api/v1/signin', Inputs).then((response) => {
-            console.log(response.data);
+            try {
+                sessionStorage.setItem('id', response.data.other._id);
+
+                dispatch(authActions.login());
+
+                history('/todo');
+            } catch (error) {
+                console.log(error);
+                alert('wrong credentials');
+            }
             
-            history('/todo');
+            
        });
        
        

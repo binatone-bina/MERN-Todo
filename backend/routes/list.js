@@ -6,9 +6,9 @@ const List = require('../models/list');
 //Create
 router.post('/addTask', async (req, res) => {
     try {
-        const {title, body, email} = req.body;
+        const {title, body, id} = req.body;
     
-        const existingUser = await User.findOne({email});
+        const existingUser = await User.findById(id);
 
         if (existingUser) {
             
@@ -22,7 +22,7 @@ router.post('/addTask', async (req, res) => {
                 existingUser.save();     
         } 
         else{
-            res.status(400).json({msg:"user doesnt exist first sign in"});
+            res.status(400).json({message:"user doesnt exist first sign in"});
         }
     }catch (error) {
         console.log(error);
@@ -34,15 +34,12 @@ router.post('/addTask', async (req, res) => {
 router.put('/updateTask/:id', async (req, res) => {
     
     try {
-        const {title, body, email} = req.body;
-    
-        const existingUser = await User.findOne({email});
-
-        if (existingUser) {
+        
+        const {title, body} = req.body;
             
-            const list = await List.findByIdAndUpdate(req.params.id, {title, body});
-            list.save().then(() => res.status(200).json({message: "Task Completed"}));
-        } 
+        const list = await List.findByIdAndUpdate(req.params.id, {title, body});
+        list.save().then(() => res.status(200).json({message: "Task Completed"}));
+        
     }catch (error) {
         console.log(error);
     }
@@ -52,9 +49,9 @@ router.put('/updateTask/:id', async (req, res) => {
 router.delete('/deleteTask/:id', async (req, res) => {
     
     try {
-        const {email} = req.body;
+        const {id} = req.body;
     
-        const existingUser = await User.findOneAndUpdate({email}, {$pull: {list: req.params.id}});
+        const existingUser = await User.findByIdAndUpdate(id, {$pull: {list: req.params.id}});
 
         if (existingUser) {
             
@@ -73,7 +70,7 @@ router.get('/getTask/:id', async (req,res) => {
         res.status(200).json({list});
     }
     else{
-        res.status(200).json({msg: "No tasks added yet"});
+        res.status(200).json({message: "No tasks added yet"});
     }
 
 })

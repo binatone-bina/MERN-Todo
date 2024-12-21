@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import './Todo.css'
 import TodoCards from './TodoCards';
@@ -6,10 +6,16 @@ import TodoCards from './TodoCards';
 import {ToastContainer, toast} from 'react-toastify'
 import Update from './Update';
 
+import axios from 'axios';
+
+let id = sessionStorage.getItem('id');
+
+let toUpdateArray = [];
+
 const Todo = () => {
 
     const [Inputs, setInputs] = useState({title: '', body: ''});
-    const [Array, setArray] = useState([]);
+    const [Array, setArray] = useState([]);    
 
     const show = () => {
         const textArea = document.getElementById("textArea");
@@ -26,24 +32,41 @@ const Todo = () => {
         setInputs({...Inputs, [name]: value});
     }
 
-    const submit = () => {
+    const submit = useCallback(async () => {
 
         if (Inputs.title ==='' || Inputs.body === '') {
             toast.error('Title or Body should not be empty');
         }
         else{
+            if (id) {
+                await axios
+                .post('http://localhost:1000/api/v2/addTask', {title: Inputs.title, body: Inputs.body, id:id })
+                .then((response) => console.log(response))
 
-            setArray([...Array, Inputs])
-            setInputs({title: '', body: ''});
-            toast.success('Your task is added');
-            toast.error('Your task was not saved. Sign in first');
+                
+                setInputs({title: '', body: ''});
+                toast.success('Your task is added');
+                
+            }
+            else{
+                setArray([...Array, Inputs])
+                setInputs({title: '', body: ''});
+                toast.success('Your task is added');
+                toast.error('Your task was not saved. Sign in first');
+            }
 
         }
-    };
+    });
 
-    const del = (id) => {
-        Array.splice(id, 1);
-        setArray([...Array]);
+    const del = async(cardId) => {
+        if (id) {
+            await axios.delete(`http://localhost:1000/api/v2/deleteTask/${cardId}`, {data:{id:id}}).then((response) => {
+                toast.success('Your task is deleted');
+            })
+        }   
+        else{
+            toast.error('Please sign up first');
+        } 
     }
 
     const dis = (value) => {
@@ -54,6 +77,25 @@ const Todo = () => {
             console.log('error')
         }
     }
+
+    const update = (value) => {
+        toUpdateArray = Array[value];
+    }
+
+    useEffect(() => {
+        const fetch = async () => {
+            await axios.get(`http://localhost:1000/api/v2/getTask/${id}`).then((response) => {
+                setArray(response.data.list);
+            })
+        };
+        if (id) {
+            fetch();
+        }
+        else{
+            toast.error('Please sign up first')
+        }
+        
+    }, [submit])
 
     return (
         <>
@@ -79,8 +121,8 @@ const Todo = () => {
                         <div className="row mt-4">
                             
                                 {Array && Array.map((item, index) =>(
-                                    <div className="col-lg-3 col-10 mx-5 my-2" key={index}>
-                                        <TodoCards title= { item.title } body= {item.body} id={index} delid={del} display={dis}/>
+                                    <div className="col-lg-3 col-10 mx-4 my-2" key={index}>
+                                        <TodoCards title= { item.title } body= {item.body} id={item._id} delid={del} display={dis} updateId={index} toBeUpdate={update}/>
                                     </div>
                                     
                                 ) )}
@@ -95,7 +137,7 @@ const Todo = () => {
             <div id='todoUpdate'>
                 <div className="todo-update d-flex align-items-center">
                     <div className="container">
-                        <Update display={dis}/>
+                        <Update display={dis} update={toUpdateArray}/>
                     </div>
                     
                 </div>

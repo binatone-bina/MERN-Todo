@@ -9,11 +9,16 @@ import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signUp/SignIn';
 import Todo from './components/todo/Todo';
 
-function App() {
+import React from 'react';
+
+
+function App() { 
+
   return(
     <div>
 
       <Router>
+        
         <Navbar/>
 
         <Routes>
@@ -26,9 +31,9 @@ function App() {
 
         </Routes>
 
-        <Footer/>
+        
       </Router>
-      
+      <Footer/>
     </div>
   )
 }
