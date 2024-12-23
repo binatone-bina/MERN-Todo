@@ -121,7 +121,7 @@ const Todo = () => {
                         <div className="row mt-4">
                             
                                 {Array && Array.map((item, index) =>(
-                                    <div className="col-lg-3 col-10 mx-4 my-2" key={index}>
+                                    <div className="col-lg-3 col-10 my-2" key={index}>
                                         <TodoCards title= { item.title } body= {item.body} id={item._id} delid={del} display={dis} updateId={index} toBeUpdate={update}/>
                                     </div>
                                     

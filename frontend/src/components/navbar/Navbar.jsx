@@ -72,7 +72,7 @@ const Navbar = () => {
                                 </li>      
                             </>
                             }
-                            
+                            {console.log(isLoggedIn)}
                              
                         </ul>
                     </div>
